@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'main/css/result.css' %}"/>
+{% endblock %}
+
+{% block main %}
+
+    <div class="total-result">
+        <p>{{ total_percentage }}<i style="color: lightblue">%</i></p>
+    </div>
+
+    <div class="container">
+    <div class="student-info">
+        <p  style="width: 100%;text-align: center">  اسم الطالب:{{ student.name }}</p>
+        <p style="width: 100%;text-align: center">  رقم الجلوس:{{ student.seat_number }}</p>
+        <p style="width: 100%;text-align: center">  الصف:{{ student.grade }}</p>
+    </div>
+    <table class="table">
+  <thead>
+    <tr>
+
+       <th scope="col">اسم المادة</th>
+        <th scope="col">الدرجة النهائية</th>
+        <th scope="col">درجة النجاح</th>
+        <th scope="col">الدرجة</th>
+
+    </tr>
+  </thead>
+  <tbody>
+  {% for subject in subjects %}
+    <tr {% if not subject.succeeded %}class="failed"{% endif %}{% if subject.got_full_mark %}class="full-mark"{% endif %}>
+
+      <td>{{ subject.subject_name }}</td>
+    <th scope="row">{{ subject.full_mark }}</th>
+    <td>{{ subject.minimum_mark }}</td>
+    <td>{{ subject.student_mark }}</td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+    </div>
+
+{% endblock %}

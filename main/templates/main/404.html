@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block main %}
+    <style>
+        body {
+            background: linear-gradient(to right, #f4fff4, #ccd4df);
+        }
+        #content {
+            direction: rtl;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+
+    <div id="content">
+        <h3> ربما رقم الجلوس  غير صحيح او لم  تظهر نتيجته بعد. </h3>
+        <h2>`{{ seat_number }}`</h2>
+    </div>
+{% endblock %}

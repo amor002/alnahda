@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'main/css/index.css' %}"/>
+{% endblock %}
+
+{% block main %}
+
+    <img src="{% static 'main/images/background.jpg' %}" alt=""/>
+    <header>
+        <blockquote>الموقع الرسمي لمدرسة النهضة المتميزة لغات لعرض نتائج الطلاب.</blockquote>
+    </header>
+    <div class="container">
+        <form method="post"> {% csrf_token %}
+            <p>*رقم الجلوس</p>
+            <div class="custom-input">
+                <input type="number"  name="seat-number"/>
+                <button type="submit" id="submit-btn" class="btn btn-primary">اظهار النتيجة</button>
+            </div>
+        </form>
+    </div>
+    {% include 'license.html' %}
+{% endblock %}
+
+{% block javascript %}
+    <script type="text/javascript">
+        $("#submit-btn").click(function(e) {
+            var seatNumber = document.getElementsByName("seat-number")[0].value;
+            if(seatNumber.length < 1 || parseInt(seatNumber) == NaN || parseInt(seatNumber) < 0) {
+                e.preventDefault();
+                alert("الرجاء ادخال رقم جلوس صحيح.");
+            }else {
+                document.getElementsByTagName("form")[0].submit();
+            }
+        });
+    </script>
+{% endblock %}
